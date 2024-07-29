@@ -9,7 +9,6 @@ class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
@@ -28,13 +27,15 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.deepPurple,
-              Colors.purpleAccent,
-              Colors.green,
-              Colors.grey
+              Color.fromARGB(255, 255, 0, 0),
+              Color.fromARGB(255, 255, 125, 0),
+              Color.fromARGB(255, 0, 255, 0),
+              Color.fromARGB(255, 0, 255, 125),
+              Color.fromARGB(255, 0, 0, 255),
+              Color.fromARGB(255, 0, 125, 255),
             ],
             begin: Alignment.topLeft,
-            end: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: Center(

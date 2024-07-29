@@ -3,21 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/widget/tabbar.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(brightness: Brightness.dark),
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-    );
-  }
-}
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -43,15 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 255, 0, 0),
-              Color.fromARGB(255, 255, 125, 0),
-              Color.fromARGB(255, 0, 255, 0),
-              Color.fromARGB(255, 0, 255, 125),
-              Color.fromARGB(255, 0, 0, 255),
-              Color.fromARGB(255, 0, 125, 255),
+              Colors.deepPurple,
+              Colors.purpleAccent,
+              Colors.green,
+              Colors.grey
             ],
             begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            end: Alignment.topLeft,
           ),
         ),
         child: Center(

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as https;
+import 'package:wallpaper_app_api/fullscreen.dart';
 
 class Wallpaper extends StatefulWidget {
   const Wallpaper({super.key});
@@ -69,7 +70,13 @@ class _WallpaperState extends State<Wallpaper> {
                   mainAxisSpacing: 7,
                 ),
                 itemBuilder: (ctx, i) => InkWell(
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    ctx,
+                    MaterialPageRoute(
+                      builder: (ctx) =>
+                          Fullscreen(imageUrl: images[i]['src']['large2x']),
+                    ),
+                  ),
                   child: Container(
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
@@ -90,7 +97,7 @@ class _WallpaperState extends State<Wallpaper> {
             child: Container(
               height: 60,
               width: double.infinity,
-              color: Colors.black,
+              color: Colors.black12,
               child: const Center(
                 child: Text(
                   'Load More..',

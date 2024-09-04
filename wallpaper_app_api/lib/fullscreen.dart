@@ -12,8 +12,8 @@ class Fullscreen extends StatefulWidget {
 }
 
 class _FullscreenState extends State<Fullscreen> {
-  Future<void> setWallpaper(BuildContext context) async {
-    int location = WallpaperManager.BOTH_SCREEN;
+  Future<void> setWallpaper(BuildContext context,int location) async {
+    // int location = WallpaperManager.BOTH_SCREEN;
     var file = await DefaultCacheManager().getSingleFile(widget.imageUrl);
     bool result =
         await WallpaperManager.setWallpaperFromFile(file.path, location);
@@ -26,6 +26,54 @@ class _FullscreenState extends State<Fullscreen> {
         const SnackBar(content: Text('Failed to set wallpaper.')),
       );
     }
+  }
+
+  Future<void> setWallpaperOptions(BuildContext content) async {
+    return showModalBottomSheet(
+      context: context,
+      builder: (_) => SizedBox(
+        width: double.infinity,
+        height: 180,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+              splashColor: Colors.grey,
+              onTap: () {
+                setWallpaper(context, WallpaperManager.HOME_SCREEN);
+                Navigator.pop(context);
+              },
+              child: const Center(
+                child: Text('Home Screen',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
+            ),
+            InkWell(
+              splashColor: Colors.grey,
+              onTap: () {
+                setWallpaper(context, WallpaperManager.LOCK_SCREEN);
+                Navigator.pop(context);
+              },
+              child: const Center(
+                child: Text('Lock Screen',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
+            ),
+            InkWell(
+              splashColor: Colors.grey,
+              onTap: (){
+                setWallpaper(context, WallpaperManager.BOTH_SCREEN);
+                Navigator.pop(context);
+              },
+              child: const Center(
+                child: Text('Both Screens',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -48,7 +96,7 @@ class _FullscreenState extends State<Fullscreen> {
             child: Image.network(widget.imageUrl),
           ),
           InkWell(
-            onTap: () => setWallpaper(context),
+            onTap: () => setWallpaperOptions(context),
             child: Container(
               height: 60,
               width: double.infinity,

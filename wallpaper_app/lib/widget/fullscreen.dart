@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 
 class FullScreen extends StatefulWidget {
   const FullScreen({super.key, required this.imageList});
@@ -10,6 +12,22 @@ class FullScreen extends StatefulWidget {
 }
 
 class _FullscreenState extends State<FullScreen> {
+  Future<void> setWallpaper(BuildContext context) async {
+    int location = WallpaperManager.BOTH_SCREEN;
+    var file = await DefaultCacheManager().getSingleFile(widget.imageList);
+    bool fileInfo =
+        await WallpaperManager.setWallpaperFromFile(file.path,location);
+    if (fileInfo) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Wallpaper set successfully!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to set wallpaper.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +58,8 @@ class _FullscreenState extends State<FullScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: InkWell(
-              onTap: () {},
+              splashColor: Colors.grey,
+              onTap: () => setWallpaper(context),
               child: Container(
                 height: 60,
                 width: double.infinity,
